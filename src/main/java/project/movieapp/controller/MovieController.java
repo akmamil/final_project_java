@@ -26,22 +26,19 @@ public class MovieController {
     public Page<Movie> getAllMovies(Pageable pageable) {
         return service.getAllMovies(pageable);
     }
-    //возвращает объект типа Page<Movie>,
-    // который представляет собой одну страницу данных
-    // из общего результата.
 
     @GetMapping("/search")
-    public List<Movie> searchMoviesByTitle(@RequestParam String title) { //Spring автоматически преобразует List<Movie>
+    public List<Movie> searchMoviesByTitle(@RequestParam String title) {
         return service.searchMoviesByTitle(title);
     }
 
     @GetMapping("/filter")
-    public Page<Movie> filterMoviesByGenre(@RequestParam String genre, Pageable pageable) { // Извлекает параметр из строки запроса
+    public Page<Movie> filterMoviesByGenre(@RequestParam String genre, Pageable pageable) {
         return service.filterMoviesByGenre(genre, pageable);
     }
 
     @PostMapping
-    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) { // Извлекает данные из тела HTTP-запроса (обычно JSON).
+    public ResponseEntity<Movie> addMovie(@RequestBody Movie movie) {
         Movie savedMovie = service.addMovie(movie);
         return new ResponseEntity<>(savedMovie, HttpStatus.CREATED); //201
     }
@@ -53,7 +50,7 @@ public class MovieController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) { // Извлекает переменную из URL.
+    public ResponseEntity<Void> deleteMovie(@PathVariable Long id) {
         service.deleteMovie(id);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT); //204
     }
