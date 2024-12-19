@@ -50,4 +50,3 @@ public class MovieService {
         repository.deleteById(id);
     }
 }
-
